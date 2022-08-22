@@ -1,0 +1,15 @@
+output   = "generated"
+wipe     = true
+no-tests = true
+add-enum-types = true
+sslmode  = "disabled"
+templates = [
+  "./templates"
+]
+
+[mysql]
+  sslmode = "false"
+  user    = "root"
+  dbname  = "sqlboiler_upsert_all"
+  host    = "127.0.0.1"
+  port    = 3306

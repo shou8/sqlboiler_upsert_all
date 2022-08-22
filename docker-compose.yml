@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  go:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3030:3030"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_HOST: mysql
+    restart: always
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "sqlboiler_upsert_all"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_ROOT_HOST: "%"
+    restart: always
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
